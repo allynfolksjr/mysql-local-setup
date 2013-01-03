@@ -7,7 +7,7 @@ MYSQLVER=$BASE
 
 localhome
 if [ $? = 2 ]; then
-    echo -e "\n\tYour localhome is set else. Please connect to the system"
+    echo -e "\n\tYour localhome is set somewhere else. Please connect to the system"
     echo -e "\tlisted above to complete setup.\n"
     exit 255
 fi
