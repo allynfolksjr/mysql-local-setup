@@ -17,7 +17,7 @@ if [ $? = 0 ]; then
     LOCALHOME=1;
     echo -e "\n\tYour localhome is on:"
     echo -e "\t"`whoami`".ovid.u.washington.edu"
-    echo -e  "\tUse this host for all connections"
+    echo -e  "\tUse this host for all SSH connections and database systems."
 fi
 
 
