@@ -9,7 +9,7 @@ localhome
 if [ $? = 2 ]; then
     echo -e "\n\tYour localhome is set somewhere else. Please connect to the system"
     echo -e "\tlisted above to complete setup by running this command:"
-    echo -e "ssh" whoami".ovid.u.washington.edu\n"
+    echo -e "\n\tssh" `whoami`".ovid.u.washington.edu\n"
     exit 255
 fi
 
