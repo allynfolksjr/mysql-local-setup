@@ -8,7 +8,8 @@ MYSQLVER=$BASE
 localhome
 if [ $? = 2 ]; then
     echo -e "\n\tYour localhome is set somewhere else. Please connect to the system"
-    echo -e "\tlisted above to complete setup.\n"
+    echo -e "\tlisted above to complete setup by running this command:"
+    echo -e "ssh" whoami".ovid.u.washington.edu\n"
     exit 255
 fi
 
@@ -46,7 +47,7 @@ if [ -d ~/mysql ]; then
     echo -e "\tYou have an old mysql instance; it will be moved to mysql.pre"
     echo -e "\tPrivilege tables will probably need to be updated; please"
     echo -e "\tsee the documentation at:" 
-    echo -e "\thttp://www.washington.edu/computing/web/publishing/mysql.html"
+    echo -e "\thttps://dev.mysql.com/doc/refman/5.5/en/mysql-upgrade.html"
 fi
 
 echo -ne "\n\tProceed? (yes/n) [n]:  "
