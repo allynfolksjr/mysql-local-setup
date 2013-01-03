@@ -5,11 +5,14 @@ OMS=0		# old local instance/version
 BASE=`/usr/bin/readlink /usr/local/mysql`
 MYSQLVER=$BASE
 
-localhome
+localhome > /dev/null 2>&1
+
 if [ $? = 2 ]; then
     echo -e "\n\tYour localhome is set somewhere else. Please connect to the system"
     echo -e "\tlisted above to complete setup by running this command:"
     echo -e "\n\tssh" `whoami`".ovid.u.washington.edu\n"
+    echo -e "\n\tYou can use 'localhome -n' to set *this* system as your localhome"
+    echo -e "\n\tif desired."
     exit 255
 fi
 
