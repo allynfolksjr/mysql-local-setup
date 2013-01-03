@@ -5,6 +5,21 @@ OMS=0		# old local instance/version
 BASE=`/usr/bin/readlink /usr/local/mysql`
 MYSQLVER=$BASE
 
+localhome
+if [ $? = 2 ]; then
+    echo -e "\n\tYour localhome is set else. Please connect to the system"
+    echo -e "\tlisted above to complete setup.\n"
+    exit 255
+fi
+
+if [ $? = 0 ]; then
+    LOCALHOME=1;
+    echo -e "\n\tYour localhome is on:"
+    echo -e "\t"`whoami`".ovid.u.washington.edu"
+    echo -e  "\tUse this host for all connections"
+fi
+
+
 if [ -d ~/mysql.pre ]; then
     echo -e "\n\tYou have apparently already upgraded once."
     echo -e "\tTo continue, please manually remove ~/mysql.pre and rerun"
@@ -14,7 +29,7 @@ fi
 
 echo ""
 echo -e "\tThis script will set up a MySQL instance using the "
-echo -e "\tC&C-installed code base and a local data set."
+echo -e "\tcentrally installed UW-IT MySQL binaries and a local data set."
 echo ""
 
 cd ~ 
@@ -39,7 +54,7 @@ echo -ne "\n\tProceed? (yes/n) [n]:  "
 read ANS
 
 if [ "$ANS" = "yes" ]; then
-    echo -e "\tProceeding with MySQL upgrade to C&C-installed binaries"
+    echo -e "\tProceeding with MySQL upgrade to UW-IT installed binaries"
 
     if [ "$OMS" = "1" ]; then
    	echo -e "\n\tMoving old ./mysql to ./mysql.pre"
