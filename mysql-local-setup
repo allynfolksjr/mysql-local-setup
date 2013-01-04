@@ -6,7 +6,7 @@ BASE=`/usr/bin/readlink /usr/local/mysql`
 MYSQLVER=$BASE
 
 
-if [ `hostname` != "vergil01.u.washington.edu"]
+if [ `hostname` != "vergil01.u.washington.edu" ]
     localhome > /dev/null 2>&1
 
     if [ $? = 2 ]; then
