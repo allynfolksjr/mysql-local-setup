@@ -7,7 +7,7 @@ MYSQLVER=$BASE
 HOSTNAME=`hostname`
 
 
-if [ HOSTNAME != "vergil01.u.washington.edu" ]
+if [ HOSTNAME != "vergil01.u.washington.edu" ]; then
     localhome > /dev/null 2>&1
 
     if [ $? = 2 ]; then
