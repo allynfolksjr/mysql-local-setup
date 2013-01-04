@@ -5,24 +5,26 @@ OMS=0		# old local instance/version
 BASE=`/usr/bin/readlink /usr/local/mysql`
 MYSQLVER=$BASE
 
-localhome > /dev/null 2>&1
 
-if [ $? = 2 ]; then
-    echo -e "\n\tYour localhome is set somewhere else. Please connect to the system"
-    echo -e "\tlisted above to complete setup by running this command:"
-    echo -e "\n\tssh" `whoami`".ovid.u.washington.edu\n"
-    echo -e "\tYou can use 'localhome -n' to set *this* system as your localhome"
-    echo -e "\tif desired."
-    exit 255
+if [ `hostname` != "vergil01.u.washington.edu"]
+    localhome > /dev/null 2>&1
+
+    if [ $? = 2 ]; then
+        echo -e "\n\tYour localhome is set somewhere else. Please connect to the system"
+        echo -e "\tlisted above to complete setup by running this command:"
+        echo -e "\n\tssh" `whoami`".ovid.u.washington.edu\n"
+        echo -e "\tYou can use 'localhome -n' to set *this* system as your localhome"
+        echo -e "\tif desired."
+        exit 255
+    fi
+
+    if [ $? = 0 ]; then
+        LOCALHOME=1;
+        echo -e "\n\tYour localhome is on:"
+        echo -e "\t"`whoami`".ovid.u.washington.edu"
+        echo -e  "\tUse this host for all SSH connections and database systems."
+    fi
 fi
-
-if [ $? = 0 ]; then
-    LOCALHOME=1;
-    echo -e "\n\tYour localhome is on:"
-    echo -e "\t"`whoami`".ovid.u.washington.edu"
-    echo -e  "\tUse this host for all SSH connections and database systems."
-fi
-
 
 if [ -d ~/mysql.pre ]; then
     echo -e "\n\tYou have apparently already upgraded once."
@@ -61,38 +63,38 @@ if [ "$ANS" = "yes" ]; then
     echo -e "\tProceeding with MySQL upgrade to UW-IT installed binaries"
 
     if [ "$OMS" = "1" ]; then
-   	echo -e "\n\tMoving old ./mysql to ./mysql.pre"
-	mv ~/mysql ~/mysql.pre
+        echo -e "\n\tMoving old ./mysql to ./mysql.pre"
+        mv ~/mysql ~/mysql.pre
     fi
 
     if [ "$MD" = "1" ]; then
-	echo -e "\n\tUsing $PWD/mysql-data"
-    else
-	echo -e "\tCreating data directory ~/mysql-data"
-	mkdir ~/mysql-data
-    fi
+       echo -e "\n\tUsing $PWD/mysql-data"
+   else
+       echo -e "\tCreating data directory ~/mysql-data"
+       mkdir ~/mysql-data
+   fi
 
-    echo -e "\tLinking to /usr/local/mysql"
+   echo -e "\tLinking to /usr/local/mysql"
 
-    mkdir ~/mysql
-    cd ~/mysql
-    ln -sf $MYSQLVER mysqlver
-    ln -sf mysqlver/bin ./bin
-    ln -sf mysqlver/docs ./docs
-    ln -sf mysqlver/include ./include
-    ln -sf mysqlver/lib ./lib
-    ln -sf mysqlver/man ./man
-    ln -sf mysqlver/scripts ./scripts
-    ln -sf mysqlver/share ./share
-    ln -sf mysqlver/sql-bench ./sql-bench
-    ln -sf mysqlver/support-files ./support-files
-    ln -sf mysqlver/tests ./tests
-    ln -sf mysqlver/usr   ./usr
+   mkdir ~/mysql
+   cd ~/mysql
+   ln -sf $MYSQLVER mysqlver
+   ln -sf mysqlver/bin ./bin
+   ln -sf mysqlver/docs ./docs
+   ln -sf mysqlver/include ./include
+   ln -sf mysqlver/lib ./lib
+   ln -sf mysqlver/man ./man
+   ln -sf mysqlver/scripts ./scripts
+   ln -sf mysqlver/share ./share
+   ln -sf mysqlver/sql-bench ./sql-bench
+   ln -sf mysqlver/support-files ./support-files
+   ln -sf mysqlver/tests ./tests
+   ln -sf mysqlver/usr   ./usr
 
-    ln -sf ~/mysql-data ./data
+   ln -sf ~/mysql-data ./data
    
 else
-   echo "Abandoning MySQL upgrade"
-   exit
+ echo "Abandoning MySQL upgrade"
+ exit
 fi 
 
