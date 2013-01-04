@@ -4,10 +4,9 @@ MD=0		# new, but prexisting data instance
 OMS=0		# old local instance/version
 BASE=`/usr/bin/readlink /usr/local/mysql`
 MYSQLVER=$BASE
-HOSTNAME=`hostname`
 
 
-if [ HOSTNAME != "vergil01.u.washington.edu" ]; then
+if [ `hostname` != "vergil01.u.washington.edu" ]; then
     localhome > /dev/null 2>&1
 
     if [ $? = 2 ]; then
